@@ -8,6 +8,7 @@ h1 {
     padding: 8px;
     text-align: center;
     margin: 10px;
+    font-size: 300%;
 }
 header {
     border: 2px solid rgb(236, 26, 26);
@@ -23,4 +24,32 @@ main {
     justify-content: center;
     gap: 15px;
     margin: 20px;
+}
+button {
+    background-color: rgb(236, 26, 26);
+    color: black;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: ease-in-out;
+}
+div {
+    border: 2px solid rgb(236, 26, 26);
+    border-radius: 15px;
+    padding: 10px;
+    background-color: black;
+    justify-content: space-around;
+    margin: 20px;
+
+}
+img {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    padding: 10px;
+    border-radius: 15px;
+    
+    
 }
