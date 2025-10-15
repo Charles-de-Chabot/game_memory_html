@@ -1,0 +1,26 @@
+body {
+    color: rgb(236, 26, 26);
+    background-color: black;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    padding: 8px;
+    text-align: center;
+    margin: 10px;
+}
+header {
+    border: 2px solid rgb(236, 26, 26);
+    border-radius: 55px;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px;
+}

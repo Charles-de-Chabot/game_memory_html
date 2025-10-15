@@ -5,11 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link icon rel="icon" type="image/png" href="icon.png">
     <title>Memory Cards</title>
 </head>
 
-<body style="background-color: black;">
-    <h1 style="padding: 8px; text-align: center; color:magenta; border: 2px solid magenta; border-radius: 55px;">Memory Game</h1>
+<body>
+    <header>
+        <div class="score">
+            <span>Score: </span><span id="score-value">0</span>
+        </div>
+        <h1>Memory Game</h1>
+        <div>
+            <span>Time: </span><span id="timer"></span>s
+        </div>
+    </header>
+    <main>
+      <button name="start" id="start" class="button" > 
+        START
+      </button>
+    </main>
 
     <script src="script.js"></script>
 </body>
