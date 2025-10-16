@@ -1,7 +1,22 @@
+/* toutes les balises */
+* {
+    /* 0 de taille aux bordures de la boite */
+    border: 0;
+    /* mode de dimentionnement sur la boite de bordure */
+    box-sizing: border-box;
+    /* margin: 0; marge exterieure de la boite */
+    margin: 0;
+    /* bordure superposé qui apparait en focus */
+    outline: 0;
+    /* padding: 0; marge interieure de la boite */
+    padding: 0;
+}
+
+
 body {
     color: rgb(236, 26, 26);
     background-color: black;
-    font-family: Arial, sans-serif;
+    font-family: 'Metamorphous', serif;
 }
 
 h1 {
@@ -9,15 +24,36 @@ h1 {
     text-align: center;
     margin: 10px;
     font-size: 300%;
+
 }
 header {
-    border: 2px solid rgb(236, 26, 26);
+    border: 2px solid hwb(0 10% 7%);
     border-radius: 55px;
+    /* gére la disposition des "enfants flex perpendiculairement au fil" */
     align-items: center;
+    /* active le mode flexbox */
     display: flex;
+    /* indique la façon dont l'espace restant est distribué entre les enfants flex */
     justify-content: space-around;
     margin: 20px;
+    
 }
+
+
+header > div {
+    border: 0px;
+    font-size: 17px;
+}
+
+
+#current-score {
+    /* Le em = 1 cadratin (taille de la police courante) 
+    C'est un multiplicateur de la dernière taille de police définie */
+    font-size: 2em;
+    color: rgb(124, 5, 36);
+    align-items: middle;
+}
+
 main {
     display: flex;
     flex-wrap: wrap;
@@ -26,14 +62,14 @@ main {
     margin: 20px;
 }
 button {
-    background-color: rgb(236, 26, 26);
-    color: black;
+    background-color: transparent;
+    color: rgb(236, 26, 26);
     border: none;
     border-radius: 8px;
     padding: 10px;
-    font-size: 15px;
+    font-size: 20px;
     cursor: pointer;
-    transition: ease-in-out;
+    font-family: 'Metamorphous', serif;
 }
 div {
     border: 2px solid rgb(236, 26, 26);
@@ -45,11 +81,13 @@ div {
 
 }
 img {
-    width: 200px;
-    height: 300px;
+    width: 150px;
+    height: 233px;
     object-fit: cover;
-    padding: 10px;
-    border-radius: 15px;
-    
+    padding: 0px;
+    margin: 20px;
+    border-radius: 20px;
+    justify-content: space-around;
     
 }
+
