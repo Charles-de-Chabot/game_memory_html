@@ -95,7 +95,8 @@ main {
 
 /* -- Cart -- */
 .card {
-    position: relative
+    position: relative;
+    transition: transform 0.2s ease-in;
 }
 /* tous les element dont l'atribut classe commence par card 
 [class^="card"] {
