@@ -22,7 +22,7 @@
     <h1>Memory Game</h1>
     <div id="current-score">
       <span class="score">00</span>
-      <button type="button" id="btn_reset-score">⚔️​​</button>
+      <button type="button" id="btn_reset-score" class="btn">⚔️​​</button>
     </div>
 
     </div>
@@ -129,6 +129,14 @@
         <div class="cardImage" style="background-image:url(img/12.png)"></div>
       </div>
     </div>
+
+    <!-- Fenêtre modale de la victoire -->
+     <div class="modal-overlay hidden">
+      <div class="modal">
+        <div id="final-score">Score final: 00</div>
+        <div class="h1">Victoire 😼​</div>
+        <button type="button" id="btn-play-again" class="btn">Rejouer?</button>
+      </div>
     </div>
   </main>
 

@@ -37,6 +37,7 @@ h1 {
 
 }
 header {
+    
     border: 2px solid hwb(0 10% 7%);
     border-radius: 55px;
     /* gére la disposition des "enfants flex perpendiculairement au fil" */
@@ -49,18 +50,53 @@ header {
     
 }
 
+.hidden {
+    /* Annule l'affichage! empêche qu'on puisse avoir la priorité dessus */
+    display: none!important; 
+}
+
+
+
+/* sélectionne tous les éléments h1 ainsi que les éléments avec la classe .h1 */
+h1,
+.h1 {
+    font-family: 'Metamorphous', serif;
+    font-size: 2em;
+    font-weight: 400;
+
+}
+
+ 
+
 
 header > div {
     border: 0px;
     font-size: 17px;
     align-items: center
+    
 }
-#btn_reset-score {
-    cursor: pointer;
+.btn {
+    padding: 5px;
     background-color: transparent;
     font-size: 0.7em;
+    border: 2px solid rgba(218, 165, 32, 0.212);
+    border-radius: 50%;
+    background-image: linear-gradient(140deg, rgb(255, 255, 255), rgba(0, 0, 0, 0.5), transparent);
+    color: white;
+    
 }
 
+    .btn::before{
+        box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5);   
+    }
+    /* Pseudo-classe pour l'état "au survol" */
+    .btn:active {
+        
+        border-color: rgb(184, 135, 11);
+        transform: scale(0.8) rotateY(2turn);
+        transition: transform .2s ease-in;
+        
+}
 
 #current-score {
     /* Le em = 1 cadratin (taille de la police courante) 
@@ -68,6 +104,7 @@ header > div {
     font-size: 2em;
     color: rgb(124, 5, 36);
     align-items: middle;
+    
 }
 
 main {
@@ -143,6 +180,32 @@ main {
         z-index: 3;
 }
 
+/* -- Modale de victoire -- */
+.modal-overlay {
+    align-items: center;
+    position : fixed;
+    /* vh= viewport height : hauteur de flottaison */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal {
+    background-color: black;
+    padding: 20px;
+    border: 2px solid hwb(0 10% 7%);
+        border-radius: 55px;
+        align-items: center;
+        display: flex;
+        justify-content: space-around;
+        gap: 5px;
+
+}
+
 
 /* -- Responsive -- */
 /* - Ecran à partir de 992px de large -*/
@@ -151,6 +214,10 @@ main {
     :root {
         --img-scale: .75;
         --cards-per-row: 6;
+    }
+    .btn,
+    .card {
+        cursor: pointer;
     }
 }   
 
