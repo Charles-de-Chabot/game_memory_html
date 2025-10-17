@@ -1,3 +1,13 @@
+/* L'element racine du html = <html> */
+:root {
+    --img-height: 233px;
+    --img-width: 150px;
+    --img-scale: .5;
+    --cards-per-row: 3;
+}
+
+
+
 /* toutes les balises */
 * {
     /* 0 de taille aux bordures de la boite */
@@ -43,6 +53,12 @@ header {
 header > div {
     border: 0px;
     font-size: 17px;
+    align-items: center
+}
+#btn_reset-score {
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 0.7em;
 }
 
 
@@ -55,39 +71,90 @@ header > div {
 }
 
 main {
+    border: 2px solid rgb(236, 26, 26);
+    border-radius: 55px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
+    justify-content: space-evenly;
+    background-color: rgb(0, 0, 0);
     margin: 20px;
+    padding: 0 20px;
 }
-button {
-    background-color: transparent;
-    color: rgb(236, 26, 26);
-    border: none;
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    font-family: 'Metamorphous', serif;
-}
-div {
-    border: 2px solid rgb(236, 26, 26);
-    border-radius: 15px;
-    padding: 10px;
-    background-color: black;
-    justify-content: space-around;
-    margin: 20px;
+#deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+    margin: 10px;
+    width: calc(
+        ( 20px * ( var(--cards-per-row) - 1 ) ) /* Nombre de gap */
+        + ( 2px * 2 * var(--cards-per-row) ) /* Taille des bordures */
+        + ( var(--img-width) * var(--img-scale) * var(--cards-per-row) )
+    );
+}    
 
+/* -- Cart -- */
+.card {
+    position: relative
 }
-img {
-    width: 150px;
-    height: 233px;
-    object-fit: cover;
-    padding: 0px;
-    margin: 20px;
-    border-radius: 20px;
-    justify-content: space-around;
-    
+/* tous les element dont l'atribut classe commence par card 
+[class^="card"] {
+}
+*/
+/* applique une transformation qui n'affecte pas les elements autours */
+    .card.flipped {
+        transform: rotateY(.5turn);
+    }
+
+/* tous les <div> enfants directs de <element classe="card"> */
+.card > div {
+    /* hauteur fixe */
+    height: calc(var(--img-height) * var(--img-scale));
+    /* largeur fixe */
+    width: calc(var(--img-width) * var(--img-scale));
+    background-size: calc(var(--img-width) * var(--img-scale)) calc(var(--img-height) * var(--img-scale));
+   
+}
+
+.cardBack {
+    background: rgb(255, 0, 0) url(img/Back.png) center center no-repeat;
+    position: relative;
+    border: 1px solid rgb(124, 5, 36);
+    z-index: 2;
+}
+
+.cardImage {
+    background: rgb(255, 0, 0) center center no-repeat;
+    border: 1px solid rgb(124, 5, 36);
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    transform: rotateY(.5turn);
+}
+
+    .card.flipped .cardImage {
+        z-index: 3;
+}
+    .card.flipped .cardBack {
+        z-index: 1;
+    }
+
+
+/* -- Responsive -- */
+/* - Ecran à partir de 992px de large -*/
+
+@media (min-width: 992px) {
+    :root {
+        --img-scale: .75;
+        --cards-per-row: 6;
+    }
+}   
+
+/* - Ecran à partir de 1400px de large -*/
+@media (min-width: 1445px) {
+    :root {
+        --img-scale: 1;
+        --cards-per-row: 8;
+    }
 }
 
