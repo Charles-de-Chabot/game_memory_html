@@ -2,53 +2,145 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="icon.png">
-    <title>Memory Cards</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="icon" type="image/png" href="icon.png">
+
+  <title>Memory Cards</title>
+
 </head>
 
 <body>
-    <header>
-        <div class="score">
-            <span>Score: </span><span id="score-value">0</span>
-        </div>
-        <h1>Memory Game</h1>
-        <div>
-            <span>Time: </span><span id="timer"></span>s
-        </div>
-    </header>
-    <main>
-      <button name="start" id="start" class="button" > 
-        START
-      </button>
-      <div classe="display">
+  <header>
+    <div>
+      <span id="high-score" class="score">High-Score:</span>
+    </div>
+    <h1>Memory Game</h1>
+    <div id="current-score">
+      <span class="score">00</span>
+      <button type="button" id="btn_reset-score" class="btn">⚔️​​</button>
+    </div>
 
-        <img src="cardBack.png" alt="Card Back" class="card" id="card1">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card2">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card3">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card4">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card5">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card6">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card7">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card8">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card9">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card10">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card11">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card12">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card13">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card14">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card15">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card16">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card17">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card18">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card19">
-        <img src="cardBack.png" alt="Card Back" class="card" id="card20">
+    </div>
+  </header>
+
+  </button>
+
+  <main>
+    <div id="deck">
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/1.png)"></div>
       </div>
-    </main>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/1.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/2.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/2.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/3.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/3.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/4.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/4.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/5.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/5.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/6.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/6.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/7.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/7.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/8.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/8.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/9.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/9.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/10.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/10.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/11.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/11.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/12.png)"></div>
+      </div>
+      <div class="card">
+        <div class="cardBack"></div>
+        <div class="cardImage" style="background-image:url(img/12.png)"></div>
+      </div>
+    </div>
 
-    <script src="script.js"></script>
+    <!-- Fenêtre modale de la victoire -->
+     <div class="modal-overlay hidden">
+      <div class="modal">
+        <div id="final-score">Score final: 00</div>
+        <div class="h1">Victoire 😼​</div>
+        <button type="button" id="btn-play-again" class="btn">Rejouer?</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 
 </html>
