@@ -20,109 +20,38 @@ function handlerDomContentLoaded() {
   Ex: const TOTO = 5, TRUC = 10, MACHIN = 54
   On peu l'écrire de manière:
   const
-    TOTO = 5,
-    TRUC = 10,
-    MACHIN = 54
+  TOTO = 5,
+  TRUC = 10,
+  MACHIN = 54
   */
 
+
   //Variables de fonctionnement de jeu
-  let arrNumCards = [];
+  let arrNumCards = []; // Objet litteral qui contient les infos de l'état actuel de la partie
+  //RÉGLAGE DU JEU
+  const gameConfig = {
+    distinctCards : 12, // Nombres d'images différetes du jeu
+    timerDelay : 1000 //Durée d'affichage des paire non matché
+  }
+
+  //Objet litérale 
+  const gameState = {
+    arrFound: [],
+    arrFlipped: [],
+    canPlay: true,
+    tries: 0,
+    timer : null // timer de retournement des cartes non matché
+
+  };
+
 
   //Etape de démarrage
   // TODO : plus tard, récuperation et affichage high-score
   // TODO : implémenter les clicks sur les boutons fixes: elbtnResetScore, elbtnPlayAgain
 
-  function getCardDom (numCard) {
-    /* <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url/[numCard].png"></div>
-      </div> 
-    */
-    const elCard = document.createElement('div');
-    elCard.classList.add('card');
-
-    //On fabrique l'interieur de elCard
-    let cardInnerHTML = '<div class="cardBack"></div>'; 
-    cardInnerHTML += `<div class="cardImage" style="background-image:url(img/${numCard}.png);"></div>`;
-    elCard.innerHTML = cardInnerHTML;
-
-    //Event listener pour le clic de la carte
-    elCard.addEventListener('click', function() {
-      elCard.classList.toggle('flipped');
-    })
-      
-  
-
-
-    return elCard;
-  }
-
-  //Créer une fonction pour réinitialiser l'interface graphique 
-  function initGame() {
-    console.log("initialisation du jeu...");
-
-    //remise à zero du current score
-    elCurrentScore.textContent = 0;
-    
-    //remise à zero du final score
-    elFinalScore.textContent = 'aucun';
-
-    //vidange du deck
-    elDeck.innerHTML = '';
-
-    //génération aléatoire d'une liste de paires de cartes
-    for (let i = 1; i <= 12; i++) {
-      //on ajoute 2 fois i à la fin du tableau
-      arrNumCards.push(i, i)
-      console.log(arrNumCards);
-    }
-
-    //on melange les nombres de la liste
-    shuffleArray(arrNumCards);
-    console.log(arrNumCards);
-    
-    //on parcour la liste pour fabriquer les cartes et les afficher
-
-    //Boucle pour parcourir un tableau => for (... ; ... ; ...)
-
-    //for ( let i = 0; i < arrNumCards.length; i++ ) {console.log(arrNumCards[i]);}
-
-    //Boucle pour parcourir nu tableau dans son itégralié => for(... in ...)
-    //for( let i in arrNumCards) {console.log(arrNumCards[i]);}
-
-    
-    //Boucle pour parcourir nu tableau dans son itégralié => Array.forEach()
-    //arrNumCards.forEach( numCard => { console.log(numCard); });
-    
-    //Boucle pour parcourir nu tableau dans son itégralié => for(... of ...)
-    for( let numCard of arrNumCards) {
-    const elCard = getCardDom(numCard);
-    elDeck.append(elCard);
-    }
-
-  
-  }
-
-  //initialisation du jeu:
-
-  //Créer les cartes
-
-  //dispose les cartes de manières aléatoire sur le deck
-  //quand le joueur cicks sur une carte elle se tertourne
-
-  //quand il click sur une deuxieme elle se retourbe aussi 
-  //si les deux cartes sont pareille elles restent retournées.
-  //si elles sont différentes elle se retourne face caché.
-  //A chaque fois que l'utilisateur retourne deux cartes current-score ++
-  //quand le joueur a retourné toutes les cartes => sauvegarde son current-score, affiche la modale de victoire
-  //envoie son current-score dans => high-score si high-score nul ou si current-score < high-score 
-  //si le joueur clicks sur rejouer une nouvelle partie commence.
-
-
   //ecouteur de click su elBtnResetScore
   elBtnResetScore.addEventListener('click', function () {
     //TODO effacer le high score de la "memoire"
-
     //on reinitialise l'affichage
     elHighScore.textContent = '';
   });
@@ -134,6 +63,161 @@ function handlerDomContentLoaded() {
     // on reinitialise le jeu
     initGame();
   })
+
+  function getCardDom(numCard) {
+    /* <div class="card" data-num-card="[numCard]">
+    <div class="cardBack"></div>
+    <div class="cardImage" style="background-image:url/[numCard].png"></div>
+    </div> 
+    */
+    const elCard = document.createElement('div');
+    elCard.classList.add('card');
+    elCard.dataset.numCard = numCard;
+    
+
+    //On fabrique l'interieur de elCard
+    let cardInnerHTML = '<div class="cardBack"></div>';
+    cardInnerHTML += `<div class="cardImage" style="background-image:url(img/${numCard}.png);"></div>`;
+    elCard.innerHTMLfinal = cardInnerHTML;
+
+    //Event listener pour le clic de la carte
+
+
+     
+    elCard.addEventListener('click', handlerCardClick);
+    
+    return elCard;
+  }
+
+  //Créer une fonction pour réinitialiser l'interface graphique 
+  function initGame() {
+    console.log("initialisation du jeu...");
+
+    //remise à zero du current score
+    gameState.tries = 0;
+    elCurrentScore.textContent = gameState.tries;
+
+    //remise à zero du final score
+    elFinalScore.textContent = 'aucun';
+
+    //remise à 0 de la liste des paires trouvées
+    gameState.arrFound = [];
+
+    // On vide la liste des carte
+    arrNumCards = []; 
+
+    //vidange du deck
+    elDeck.innerHTML = '';
+
+    //génération aléatoire d'une liste de paires de cartes
+    for (let i = 1; i <= gameConfig.distinctCards; i++) {
+      //on ajoute 2 fois i à la fin du tableau
+      arrNumCards.push(i, i)
+      console.log(arrNumCards);
+    }
+
+    //on melange les nombres de la liste
+    shuffleArray(arrNumCards);
+    console.log(arrNumCards);
+
+    //on parcour la liste pour fabriquer les cartes et les afficher
+
+    //Boucle pour parcourir un tableau => for (... ; ... ; ...)
+
+    //for ( let i = 0; i < arrNumCards.length; i++ ) {console.log(arrNumCards[i]);}
+
+    //Boucle pour parcourir nu tableau dans son itégralié => for(... in ...)
+    //for( let i in arrNumCards) {console.log(arrNumCards[i]);}
+
+
+    //Boucle pour parcourir nu tableau dans son itégralié => Array.forEach()
+    //arrNumCards.forEach( numCard => { console.log(numCard); });
+
+    //Boucle pour parcourir nu tableau dans son itégralié => for(... of ...)
+    for (let numCard of arrNumCards) {
+      const elCard = getCardDom(numCard);
+      elDeck.append(elCard);
+    }
+
+
+  }
+
+  // gestionnaire de clicks d'une carte
+  function handlerCardClick() {
+    //console.log("cliqué :", this.dataset.numCard);
+    //technique Early Return: on sort de la fonction si on a plus besoin de la suite du code. 
+    // On limite l'emboitement de plusieur indentations typiquement généré par des blocs if... else... les uns dans les autres
+    //Si on a pas le droit de retourner les cartes OU si la carte cliqué est déja retourné
+    if (!gameState.canPlay || this.classList.contains('flipped')) return; // Les accolades sont optionelles lorsque l'on n'a qu'une seul option
+    //sinon on continue
+    //console.log("cliqué: ", this.dataset.numCard);
+
+    //On réinitialise le timer
+    clearTimeout(gameState.timer);
+    
+    //on retourne la carte cliqué
+    this.classList.add('flipped');
+
+    //Si on n'a pas encore retourné de carte
+    if (!gameState.arrFlipped.length > 0) {
+      //on ajoute l'élément de la carte dnas arrFliped
+      gameState.arrFlipped.push(this)
+      //on sort
+      return;
+    
+    }
+    // sinon on continue 
+    //  incrémenter
+    gameState.tries ++;
+    //on met a jour le score
+    elCurrentScore.textContent = gameState.tries
+
+    //On récupère lez numéro des deux cartes 
+    const numCard1 = gameState.arrFlipped[0].dataset.numCard;
+    const numCard2 = this.dataset.numCard;
+
+    //si les deux cartes son identique
+    if (numCard1 === numCard2) {
+      //on ajoute le numéro de la carte dans la liste des cartes trouvé
+      gameState.arrFound.push(numCard1);
+      //On vide arrFlipped pour le prochaine tentative
+      gameState.arrFlipped = [];
+
+      //si on trouve les paires => on sort
+      if(gameState.arrFound.length < gameConfig.distinctCards) return;
+
+      //sinon gagné
+      // On met à jour le score final
+      elFinalScore.textContent = gameState.tries;
+      //On affiche la modale
+      elModalWin.classList.remove('hidden');
+    }
+
+    // on continue, on ajoute la carte actuelle à liste des cartes retournées
+    gameState.arrFlipped.push(this);
+
+    //On désactive la possibilité de jouer d'autres cartes
+    gameState.canPlay = false;
+
+    // on lance un timer qui remet les cartes en place au bout d'un temps défini
+    // Dans une fonction => la convezntion dit que une argument seul qui est à coups sur "undefined doit être nommé "_"
+    gameState.timer = setTimeout( _ => {
+      //pour chaques carte retourné sur cette tentative
+      for(let elCard of gameState.arrFlipped) {
+        elCard.classList.remove('flipped');
+      }
+      //on réactive la possibilité de retourner une autre carte 
+      gameState.canPlay = true;
+
+      //on réinitialise la liste des cartes retourné pour une nouvelle rentative
+      gameState.arrFlipped = [];
+
+    }, gameConfig.timerDelay );
+
+
+  }
+  
+
 
   // fonction utilitaire de mélange aléatoire d'un tableau
   function shuffleArray(arr) {
@@ -156,11 +240,11 @@ function handlerDomContentLoaded() {
       // *** [arr[idMax], arr[idRandom]] = [ValueAtRandom, valueAtMax]; ***
 
       //décrémente l'idMax avec lequel on travail 
-      idMax --;
+      idMax--;
     }
   }
-    initGame();
+  initGame();
 }
 
-  // Mise en place de l'écouteur d'événement pour ne lancer le code qu'une fois le DOM entièrement chargé par le navigateur.
-  document.addEventListener("DOMContentLoaded", handlerDomContentLoaded)
+// Mise en place de l'écouteur d'événement pour ne lancer le code qu'une fois le DOM entièrement chargé par le navigateur.
+document.addEventListener("DOMContentLoaded", handlerDomContentLoaded)
