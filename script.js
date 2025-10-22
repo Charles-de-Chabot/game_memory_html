@@ -28,11 +28,10 @@ function handlerDomContentLoaded() {
 
   //Variables de fonctionnement de jeu
   let arrNumCards = []; // Objet litteral qui contient les infos de l'état actuel de la partie
+
   //RÉGLAGE DU JEU
-  const gameConfig = {
-    distinctCards : 12, // Nombres d'images différetes du jeu
-    timerDelay : 1000 //Durée d'affichage des paire non matché
-  }
+  // |===> dans config.js <===|
+  // Variable gameConfig
 
   //Objet litérale 
   const gameState = {
@@ -49,10 +48,12 @@ function handlerDomContentLoaded() {
   //Etape de démarrage
   //récuperation et affichage high-score
   const storedHighScore = localStorage.getItem('memoire-game-highScore');
+
   //si il n'en existe pas on le créer dans le stockage du navigateur
   if(storedHighScore === null ) {
     localStorage.setItem('memoire-game-highScore', gameState.highScore, gameState.highScore);
   }
+
   //Sinon on mets a jour le gameState 
   else{
     gameState.highScore = parseInt(storedHighScore, 10)
@@ -74,7 +75,7 @@ function handlerDomContentLoaded() {
 
   //ecouteur de click su elBtnPlayAgain
   elBtnPlayAgain.addEventListener('click', function () {
-    
+
     // on cache la modale de victoire
     elModalWin.classList.add("hidden");
     
@@ -199,19 +200,24 @@ function handlerDomContentLoaded() {
     const numCard1 = gameState.arrFlipped[0].dataset.numCard;
     const numCard2 = this.dataset.numCard;
 
+
     //si les deux cartes son identique
     if (numCard1 === numCard2) {
+
       //on ajoute le numéro de la carte dans la liste des cartes trouvé
       gameState.arrFound.push(numCard1);
+
       //On vide arrFlipped pour le prochaine tentative
       gameState.arrFlipped = [];
 
       //si on trouve les paires => on sort
       if(gameState.arrFound.length < gameConfig.distinctCards) return;
 
+
       //sinon gagné
       // On met à jour le score final
       elFinalScore.textContent = gameState.tries;
+
       //On affiche la modale
       elModalWin.classList.remove('hidden');
 
@@ -220,8 +226,10 @@ function handlerDomContentLoaded() {
       //Si le nombre de tentatives est meilleur que highScore OU qu'il n'y a pas de highScore 
       //=> On enregistre le nouveau highScore
       if (gameState.highScore <= 0 || gameState.tries < gameState.highScore ){
+
         //on met à jour le gamestate
         gameState.highScore = gameState.tries;
+
         //on enrregistre le nouveau score dans le localStorage
         localStorage.setItem( 'memoire-game-highScore', gameState.highScore);
       }
