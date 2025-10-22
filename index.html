@@ -17,130 +17,69 @@
 <body>
   <header>
     <div>
-      <span id="high-score" class="score">High-Score:</span>
+      <span>High-Score:</span>
+      <span id="high-score" class="score"></span>
+      <button type="button" id="btn-reset-score" class="btn">⚔️​​</button>
     </div>
     <h1>Memory Game</h1>
-    <div id="current-score">
-      <span class="score">00</span>
-      <button type="button" id="btn_reset-score" class="btn">⚔️​​</button>
+    <!--Indicateur du theme choisi-->
+    <div class="theme-indicator">Theme <span id="current-theme">Par default</span></div>
+    <div class="header-droite">
+      <div id="current-score">
+      <span class="score">0</span>
+      </div>
+      <button type="button" id="btn-settings" class="btn">⚙️​</button>
+    <!-- Bouton des réglages-->
     </div>
 
+    
+      
     </div>
+
   </header>
-
-  </button>
-
   <main>
-    <div id="deck">
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/1.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/1.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/2.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/2.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/3.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/3.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/4.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/4.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/5.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/5.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/6.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/6.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/7.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/7.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/8.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/8.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/9.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/9.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/10.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/10.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/11.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/11.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/12.png)"></div>
-      </div>
-      <div class="card">
-        <div class="cardBack"></div>
-        <div class="cardImage" style="background-image:url(img/12.png)"></div>
-      </div>
-    </div>
+    <div id="deck"></div>
 
+    
     <!-- Fenêtre modale de la victoire -->
-     <div class="modal-overlay hidden">
+    <div id="modal-win" class="modal-overlay hidden">
       <div class="modal">
-        <div id="final-score">Score final: 00</div>
-        <div class="h1">Victoire 😼​</div>
+        <div class="h1">Réglages</div>
         <button type="button" id="btn-play-again" class="btn">Rejouer?</button>
       </div>
     </div>
-  </main>
+    
+    
+    <!-- Fenêtre modale settings -->
+    <div id="modal-settings" class="modal-overlay hidden">
+      <div class="modal">
+        <div id="final-score"></div>
+        <div class="h1">Réglages</div>
+        <!-- div>(label+(select#mode>option*3))-->
+          <div>
+            <label for="select-mode">Difficulté</label>
+            <select id="select-mode">
+              <option value="6">​🐟 DORY</option>
+              <option value="9">🫡 NORMAL</option>
+              <option value="12">🧠 KRANG</option>
+            </select>
+          </div>
+          <div>
+              <label for="select-theme">select-theme</label>
+              <select id="select-theme">
+                <option value="default">Par default</option>
+              </select>
+          </div>
 
+            <button type="button" id="btn-settings-cancel" class="btn">annuler</button>
+            <button type="button" id="btn-settings-ok" class="btn">ok</button>
+      </div>
+    </div>
+  </main>
+  <button type="button id=" btn-settings" class="btn">⚙️​</button>
+  <script src="config.js"></script>
   <script src="script.js"></script>
+  </script>
 </body>
 
 </html>
