@@ -24,9 +24,9 @@
 
 
 body {
-    color: rgb(236, 26, 26);
-    background-color: black;
-    font-family: 'Metamorphous', serif;
+    color: var(--body);
+    background-color: var(--boddy-bg);
+    font-family: var(--body-font);
 }
 
 h1 {
@@ -38,7 +38,8 @@ h1 {
 }
 header {
     
-    border: 2px solid hwb(0 10% 7%);
+    border: 2px solid ;
+    border-color: var(--header-border);
     border-radius: 55px;
     /* gére la disposition des "enfants flex perpendiculairement au fil" */
     align-items: center;
@@ -58,9 +59,9 @@ header {
 
 
 /* sélectionne tous les éléments h1 ainsi que les éléments avec la classe .h1 */
-h1,
+
 .h1 {
-    font-family: 'Metamorphous', serif;
+    font-family: var(--h1-font);
     font-size: 2.5em;
     font-weight: 400;
 
@@ -85,25 +86,30 @@ header > div {
 }
 .btn {
     padding: 5px;
-    background-color: transparent;
+    background-color: var(--btn-bg);
     font-size: 0.8em;
     border: 2px solid rgba(218, 165, 32, 0.212);
+    border-color: var(--btn-border);
     border-radius: 50%;
-    background-image: linear-gradient(140deg, rgb(255, 255, 255), rgba(0, 0, 0, 0.5), transparent);
-    color: white;
+    background-image: var(--btn-bg-image);
+    color: var(--btn-color);
     
 }
 
     .btn::before{
-        box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5);   
+        box-shadow: var(--btn-bf-bx-shadow);
     }
     /* Pseudo-classe pour l'état "au survol" */
     .btn:active {
         
-        border-color: rgb(184, 135, 11);
+        border-color: var(--btn-acive-border-color);
         transform: scale(0.8) rotateY(2turn);
         transition: transform .2s ease-in;
         
+}
+
+#btn-settings{
+    font-size: 2em;
 }
 
 .theme-indicator {

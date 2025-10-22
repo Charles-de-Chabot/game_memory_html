@@ -14,7 +14,12 @@ function handlerDomContentLoaded() {
   const elFinalScore = document.getElementById("final-score");
   const elModalWin = document.getElementById("modal-win");
   const elBtnPlayAgain = document.getElementById("btn-play-again");
-
+  const elModalSettings = document.getElementById("modal-settings");
+  const elSelectMode = document.getElementById("select-mode");
+  const elSelectheme = document.getElementById("select-theme");
+  const elBtnSettings = document.getElementById("btn-settings");
+  const elBtnSettingsCancel = document.getElementById("btn-settings-cancel");
+  const elBtnSettingsOk = document.getElementById("btn-settings-ok");
 
   /* On peut déclarer plusieurs constantes avezc la même "const"
   Ex: const TOTO = 5, TRUC = 10, MACHIN = 54
@@ -32,6 +37,9 @@ function handlerDomContentLoaded() {
   //RÉGLAGE DU JEU
   // |===> dans config.js <===|
   // Variable gameConfig
+
+//---CONFIGURATION PAR DEFAUT---
+let gameConfig = gameConfigMedium;
 
   //Objet litérale 
   const gameState = {
@@ -73,13 +81,38 @@ function handlerDomContentLoaded() {
     elHighScore.textContent = 'aucun'
   });
 
+  //ecouteur de click sur elBtnSettings
+  elBtnSettings.addEventListener('click', function() {
+    elModalSettings.classList.remove('hidden')
+  })
+  
+  //zcouteur de click sur l'element elBtnSettingsCancel
+  elBtnSettingsCancel.addEventListener('click', function() {
+    elModalSettings.classList.add('hidden')
+  })
+
+  //zcouteur de click sur l'element elBtnSettingsOk
+  elBtnSettingsOk.addEventListener('click', function() {
+    if (elSelectMode.value === "6") {
+      gameConfig = gameConfigEasy
+    };
+
+    if (elSelectMode.value === "9") {
+      gameConfig = gameConfigMedium
+    };
+
+    if (elSelectMode.value === "12") {
+      gameConfig = gameConfigHard
+    };
+
+    elModalSettings.classList.add('hidden')
+  })
+
   //ecouteur de click su elBtnPlayAgain
   elBtnPlayAgain.addEventListener('click', function () {
 
     // on cache la modale de victoire
     elModalWin.classList.add("hidden");
-
-
 
 
     initGame();
@@ -102,8 +135,6 @@ function handlerDomContentLoaded() {
     elCard.innerHTML = cardInnerHTML;
 
     //Event listener pour le clic de la carte
-
-
 
     elCard.addEventListener('click', handlerCardClick);
 

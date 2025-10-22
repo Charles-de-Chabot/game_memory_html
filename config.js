@@ -11,10 +11,10 @@ const gameConfigMedium = {
 const gameConfigEasy = {
     "distinctCards": 6,
     "timerDelay": 1000
-  }
+  };
 
 const gameConfigHard = {
     "distinctCards": 12,
     "timerDelay":1000
 
-}
+};

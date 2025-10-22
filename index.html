@@ -44,7 +44,8 @@
     <!-- Fenêtre modale de la victoire -->
     <div id="modal-win" class="modal-overlay hidden">
       <div class="modal">
-        <div class="h1">Réglages</div>
+        <div id="final-score"></div>
+        <div class="h1">victoire</div>
         <button type="button" id="btn-play-again" class="btn">Rejouer?</button>
       </div>
     </div>
@@ -53,14 +54,13 @@
     <!-- Fenêtre modale settings -->
     <div id="modal-settings" class="modal-overlay hidden">
       <div class="modal">
-        <div id="final-score"></div>
         <div class="h1">Réglages</div>
         <!-- div>(label+(select#mode>option*3))-->
           <div>
             <label for="select-mode">Difficulté</label>
             <select id="select-mode">
               <option value="6">​🐟 DORY</option>
-              <option value="9">🫡 NORMAL</option>
+              <option value="9" selected>🫡 NORMAL</option>
               <option value="12">🧠 KRANG</option>
             </select>
           </div>
@@ -76,7 +76,6 @@
       </div>
     </div>
   </main>
-  <button type="button id=" btn-settings" class="btn">⚙️​</button>
   <script src="config.js"></script>
   <script src="script.js"></script>
   </script>
