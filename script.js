@@ -40,28 +40,48 @@ function handlerDomContentLoaded() {
     arrFlipped: [],
     canPlay: true,
     tries: 0,
+    highScore: 0, //0 pas de high score
     timer : null // timer de retournement des cartes non matché
 
   };
 
 
   //Etape de démarrage
-  // TODO : plus tard, récuperation et affichage high-score
-  // TODO : implémenter les clicks sur les boutons fixes: elbtnResetScore, elbtnPlayAgain
+  //récuperation et affichage high-score
+  const storedHighScore = localStorage.getItem('memoire-game-highScore');
+  //si il n'en existe pas on le créer dans le stockage du navigateur
+  if(storedHighScore === null ) {
+    localStorage.setItem('memoire-game-highScore', gameState.highScore, gameState.highScore);
+  }
+  //Sinon on mets a jour le gameState 
+  else{
+    gameState.highScore = parseInt(storedHighScore, 10)
+  }
+ 
+
+
+  //implémenter les clicks sur les boutons fixes: elbtnResetScore, elbtnPlayAgain
 
   //ecouteur de click su elBtnResetScore
   elBtnResetScore.addEventListener('click', function () {
-    //TODO effacer le high score de la "memoire"
+
+    //effacer le high score de la "memoire"
+    localStorage.removeItem ('memoire-game-highScore');
+
     //on reinitialise l'affichage
-    elHighScore.textContent = '';
+    elHighScore.textContent = 'aucun'
   });
 
   //ecouteur de click su elBtnPlayAgain
   elBtnPlayAgain.addEventListener('click', function () {
+    
     // on cache la modale de victoire
     elModalWin.classList.add("hidden");
-    // on reinitialise le jeu
-    initGame();
+    
+    
+    
+    
+      initGame();
   })
 
   function getCardDom(numCard) {
@@ -78,7 +98,7 @@ function handlerDomContentLoaded() {
     //On fabrique l'interieur de elCard
     let cardInnerHTML = '<div class="cardBack"></div>';
     cardInnerHTML += `<div class="cardImage" style="background-image:url(img/${numCard}.png);"></div>`;
-    elCard.innerHTMLfinal = cardInnerHTML;
+    elCard.innerHTML = cardInnerHTML;
 
     //Event listener pour le clic de la carte
 
@@ -109,6 +129,9 @@ function handlerDomContentLoaded() {
     //vidange du deck
     elDeck.innerHTML = '';
 
+    //Afficher le HIghScore
+    elHighScore.textContent = gameState.highScore > 0 ? gameState.highScore : 'aucun';
+
     //génération aléatoire d'une liste de paires de cartes
     for (let i = 1; i <= gameConfig.distinctCards; i++) {
       //on ajoute 2 fois i à la fin du tableau
@@ -116,7 +139,7 @@ function handlerDomContentLoaded() {
       console.log(arrNumCards);
     }
 
-    //on melange les nombres de la liste
+    //on melange les nombres de la liU queste
     shuffleArray(arrNumCards);
     console.log(arrNumCards);
 
@@ -191,6 +214,18 @@ function handlerDomContentLoaded() {
       elFinalScore.textContent = gameState.tries;
       //On affiche la modale
       elModalWin.classList.remove('hidden');
+
+      // gestion du highScore
+      //sur un test avec "OU", on met d'abord le cas le plus féqueent car s'il est vrai l'autre test ne sera pas evalué car il n'aura aucun effet sur le resultat final 
+      //Si le nombre de tentatives est meilleur que highScore OU qu'il n'y a pas de highScore 
+      //=> On enregistre le nouveau highScore
+      if (gameState.highScore <= 0 || gameState.tries < gameState.highScore ){
+        //on met à jour le gamestate
+        gameState.highScore = gameState.tries;
+        //on enrregistre le nouveau score dans le localStorage
+        localStorage.setItem( 'memoire-game-highScore', gameState.highScore);
+      }
+      
     }
 
     // on continue, on ajoute la carte actuelle à liste des cartes retournées
