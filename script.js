@@ -14,6 +14,11 @@ function handlerDomContentLoaded() {
   const elFinalScore = document.getElementById("final-score");
   const elModalWin = document.getElementById("modal-win");
   const elBtnPlayAgain = document.getElementById("btn-play-again");
+  const elBtnSettings = document.getElementById("btn-settings");
+  const elModalSettings = document.getElementById("modal-settings");
+  const elBtnSettingsCancel = document.getElementById("btn-settings-cancel");
+  const elBtnSettingsOk = document.getElementById("btn-settings-ok");
+  const elSelectMode = document.getElementById("select-mode");
 
 
   /* On peut déclarer plusieurs constantes avezc la même "const"
@@ -84,6 +89,30 @@ function handlerDomContentLoaded() {
     
       initGame();
   })
+
+  // Ecouteur de click sur le bouton des réglages pour afficher la modale
+  elBtnSettings.addEventListener('click', function() {
+    // On récupère la valeur actuelle de la difficulté et on met à jour le select
+    elSelectMode.value = gameConfig.distinctCards;
+    elModalSettings.classList.remove('hidden');
+  });
+
+  // Ecouteur de click sur le bouton "annuler" de la modale des réglages
+  elBtnSettingsCancel.addEventListener('click', function() {
+    elModalSettings.classList.add('hidden');
+  });
+
+  // Ecouteur de click sur le bouton "ok" de la modale des réglages
+  elBtnSettingsOk.addEventListener('click', function() {
+    // On récupère la nouvelle valeur de difficulté
+    const newDifficulty = parseInt(elSelectMode.value, 10);
+    // On met à jour la configuration du jeu
+    gameConfig.distinctCards = newDifficulty;
+    // On cache la modale
+    elModalSettings.classList.add('hidden');
+    // On relance une partie
+    initGame();
+  });
 
   function getCardDom(numCard) {
     /* <div class="card" data-num-card="[numCard]">
